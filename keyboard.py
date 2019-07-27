@@ -108,6 +108,7 @@ modifierMap = {
     "alt": "a",
     "angry": "a",
     "control": "c",
+    "cutter": "c",
     "shift": "s",
     "super": "w",
 }
@@ -123,7 +124,7 @@ singleModifierMap = {
 
 letterMap = {
     "(alpha|arch)": "a",
-    "(bravo|brav) ": "b",
+    "(bravo) ": "b",
     "(charlie|turley|char) ": "c",
     "(delta|del) ": "d",
     "(echo|every) ": "e",
@@ -145,39 +146,10 @@ letterMap = {
     "(uniform) ": "u",
     "(victor) ": "v",
     "(whiskey) ": "w",
-    "(x.-ray|x-ray) ": "x",
+    "(expert) ": "x",
     "(yankee) ": "y",
     "(zulu|zipper) ": "z",
 }
-#letterMap = {
-    #"(alpha|arch)": "a",
-    #"(bravo|brav) ": "b",
-    #"(charlie|turley|char) ": "c",
-    #"(delta|del) ": "d",
-    #"(echo|eck) ": "e",
-    #"(foxtrot|fox) ": "f",
-    #"(golf|gang) ": "g",
-    #"(hotel) ": "h",
-    #"(india|indigo|ish) ": "i",
-    #"(juliet|julia) ": "j",
-    #"(kilo) ": "k",
-    #"(lima|lion|line|lie) ": "l",
-    #"(mike) ": "m",
-    #"(november|noy) ": "n",
-    #"(Oscar|osh) ": "o",
-    #"(papa|poppa|pom) ": "p",
-    #"(quebec|quiche|queen) ": "q",
-    #"(romeo|ree) ": "r",
-    #"(sierra|soy) ": "s",
-    #"(tango|tay) ": "t",
-    #"(uniform|umm) ": "u",
-    #"(victor|van) ": "v",
-    #"(whiskey|wes) ": "w",
-    #"(x-ray) ": "x",
-    #"(yankee|yaa) ": "y",
-    #"(zulu) ": "z",
-#}
-
 
 # generate uppercase versions of every letter
 upperLetterMap = {}
@@ -280,19 +252,21 @@ grammarCfg.cmd.map = Item(
         "release control": Key("ctrl:up"),
         "release [all]": release,
         "press key <pressKey>": Key("%(pressKey)s"),
+        "<modifier1> <pressKey>": Key("%(modifier1)s-%(pressKey)s"),
+        "<modifierSingle> <modifier1> <pressKey>": Key("%(modifierSingle)s:down, %(modifier1)s-%(pressKey)s, %(modifierSingle)s:up"),
         # Closures.
-        #"angle brackets": Key("langle, rangle, left/3"),
-        #"[square] brackets": Key("lbracket, rbracket, left/3"),
-        #"[curly] braces": Key("lbrace, rbrace, left/3"),
-        #"(parens|parentheses)": Key("lparen, rparen, left/3"),
-        #"quotes": Key("dquote/3, dquote/3, left/3"),
-        #"backticks": Key("backtick:2, left"),
-        #"single quotes": Key("squote, squote, left/3"),
+        "angle brackets": Key("langle, rangle, left/3"),
+        "[square] brackets": Key("lbracket, rbracket, left/3"),
+        "[curly] braces": Key("lbrace, rbrace, left/3"),
+        "(parens|parentheses)": Key("lparen, rparen, left/3"),
+        "quotes": Key("dquote/3, dquote/3, left/3"),
+        "backticks": Key("backtick:2, left"),
+        "single quotes": Key("squote, squote, left/3"),
         "squiggle": Text("~"),
         "backtick": Key("backtick"),
         # Shorthand multiple characters.
-        "double <char>": Text("%(char)s%(char)s"),
-        "triple <char>": Text("%(char)s%(char)s%(char)s"),
+        #"double <char>": Text("%(char)s%(char)s"),
+        #"triple <char>": Text("%(char)s%(char)s%(char)s"),
         "double escape": Key("escape, escape"),  # Exiting menus.
         # Punctuation and separation characters, for quick editing.
         "colon [<n>]": Key("colon/2:%(n)d"),
@@ -344,7 +318,7 @@ grammarCfg.cmd.map = Item(
         'change <text> to <text2>': Key("home, slash") + Text("%(text)s") + Key("enter, c, e") + Text("%(text2)s") + Key("escape"),
 
         # Microphone sleep/cancel started dictation.
-        "[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),  # @IgnorePep8
+        # "[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),  # @IgnorePep8
     },
     namespace={
         "Key": Key,
@@ -354,7 +328,7 @@ grammarCfg.cmd.map = Item(
 
 
 class KeystrokeRule(MappingRule):
-    exported = False
+    #exported = False
     mapping = grammarCfg.cmd.map
     extras = [
         IntegerRef("n", 1, 100),
