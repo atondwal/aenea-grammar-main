@@ -1,30 +1,31 @@
 # commands for controlling various programs
 
-from aenea import *
+if False:
+    from aenea import *
 
-def copyGrammars():
-    import os
-    os.system("copy C:\\grammar\\*.py C:\\Natlink\\Natlink\\MacroSystem");
-    print "Done copying, reloading grammar..."
+    def copyGrammars():
+        import os
+        os.system("copy C:\\grammar\\*.py C:\\Natlink\\Natlink\\MacroSystem");
+        print "Done copying, reloading grammar..."
 
-    from _aenea import reload_code
-    reload_code()
+        from _aenea import reload_code
+        reload_code()
 
-class VMSetupRule(MappingRule):
-    mapping = {
-        "copy in new grammars": Function(copyGrammars)
-    }
+    class VMSetupRule(MappingRule):
+        mapping = {
+            "copy in new grammars": Function(copyGrammars)
+        }
 
-grammar = dragonfly.Grammar('vm_setup')
+    grammar = dragonfly.Grammar('vm_setup')
 
-grammar.add_rule(VMSetupRule())
+    grammar.add_rule(VMSetupRule())
 
-grammar.load()
+    grammar.load()
 
 
-# Unload function which will be called at unload time.
-def unload():
-    global grammar
-    if grammar:
-        grammar.unload()
-    grammar = None
+    # Unload function which will be called at unload time.
+    def unload():
+        global grammar
+        if grammar:
+            grammar.unload()
+        grammar = None

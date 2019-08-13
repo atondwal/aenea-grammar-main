@@ -47,7 +47,7 @@ class ProgramsRule(MappingRule):
         "vim previous [tab] [<n>]": Text(':tabprevious %(n)d\n'),
         "vim (switch|toggle|swap)": Key('c-w, c-w'),
         "vim rotate": Key('c-w, r'),
-        "vim try that": Key('escape, colon, w, enter, a-tab/5, up, enter'),
+        "vim try that": Key('escape, colon, w, enter, a-l/5, up, enter'),
 
         'screen': Key('c-a'),
         'screen switch': Key('c-a, c-a'),

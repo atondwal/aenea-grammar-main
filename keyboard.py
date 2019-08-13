@@ -122,6 +122,33 @@ singleModifierMap = {
     "super": "win",
 }
 
+# air|
+# bat|
+# cap|
+# dip|
+# each|
+# far|
+# gone|
+# harp|
+# sit|
+# jury|
+# crunch|
+# look|
+# mad|
+# near|
+# odd|
+# pit|
+# quench|
+# red|
+# sun|
+# trap|
+# urge|
+# vest|
+# whale|
+# plex|
+# yank|
+# zip|
+
 letterMap = {
     "(alpha|arch)": "a",
     "(bravo) ": "b",
@@ -280,12 +307,12 @@ grammarCfg.cmd.map = Item(
         "<char>": Text("%(char)s"),
 
         'langle [<n>]': Key('langle:%(n)d'),
-        'lace [<n>]':   Key('lbrace:%(n)d'),
+        'larry [<n>]':   Key('lbrace:%(n)d'),
         '(lack|lair) [<n>]':   Key('lbracket:%(n)d'),
         #'(laip|len) [<n>]':   Key('lparen:%(n)d'),
         'len [<n>]':    Key('lparen:%(n)d'),
         'rangle [<n>]': Key('rangle:%(n)d'),
-        'race [<n>]':   Key('rbrace:%(n)d'),
+        '(mo|race) [<n>]':   Key('rbrace:%(n)d'),
         '(rack|rare) [<n>]':   Key('rbracket:%(n)d'),
         #'(raip|ren|wren) [<n>]':   Key('rparen:%(n)d'),
         '(ren|wren) [<n>]':   Key('rparen:%(n)d'),
@@ -331,7 +358,7 @@ class KeystrokeRule(MappingRule):
     #exported = False
     mapping = grammarCfg.cmd.map
     extras = [
-        IntegerRef("n", 1, 100),
+        IntegerRef("n", 1, 300),
         IntegerRef("num", 0, 1000000),
         Dictation("text"),
         Dictation("text2"),
